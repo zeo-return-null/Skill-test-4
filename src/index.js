@@ -1,10 +1,19 @@
-import app from './app'
+import app from './app.js'
 import https from 'https'
 import fs from 'fs'
+import { PORT } from "./config.js"
+import { client } from "./middleware/redis.client.js"
 
-https.createServer({
-    key: fs.readFileSync('./src/certs/key.pem'),
-    cert: fs.readFileSync('./src/certs/cert.pem')
-}, app).listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`)
+await client.connect();
+console.log("Conectado a Redis");
+
+// https.createServer({
+//     key: fs.readFileSync('./src/utils/certs/key.pem'),
+//     cert: fs.readFileSync('./src/utils/certs/cert.pem')
+// }, app).listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`)
+// })
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
