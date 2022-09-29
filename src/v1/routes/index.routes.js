@@ -1,11 +1,14 @@
-import { Router } from 'express'
+import { Router } from "express";
 
-const router = Router()
+const router = Router();
 
 router
-    .get("/", (req, res) => {
-        res.send("Bienvenido a TinderJob")
-    })
-    .get("/profile")
-    .get("/timeline")
-    .get("/settings")
+  .get("/", (req, res) => {
+    res.render('index');
+  })
+  .get("/profile")
+  .get("/timeline")
+  .get("/settings");
+
+
+export default router;
