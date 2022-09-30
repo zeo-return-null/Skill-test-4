@@ -1,0 +1,15 @@
+<%- include('partials/head', {title: "TP 4 Skill Factory NodeJS - Index"}); %>
+
+<body>
+  <main class="container">
+    <div class="container">
+      <h1>Algo salio mal - Tinderjob</h1>
+    </div>
+    <div class="container">
+      <h3><%= message %>: <%= error %></h3>
+      <a href="/api/auth/register" role="button"> Registrarse</a>
+      <a href="/api/auth/login" role="button"> Iniciar sesión</a>
+      <a href="/api/oauth/google" role="button"> Iniciar con Google</a>
+    </div>
+  </main>
+</body>

@@ -1,0 +1,39 @@
+<%- include('partials/head', {title: "TP 4 Skill Factory NodeJS - Registro"});
+%>
+
+<body>
+  <main class="container">
+    <div class="container">
+      <h1>Registro - Tinderjob</h1>
+    </div>
+    <div class="container">
+      <form method="post" action="/api/auth/register">
+        <label for="name">
+          Nombre
+          <input type="name" id="name" name="name" required />
+        </label>
+
+        <label for="surname">
+          Apellido
+          <input type="surname" id="surname" name="surname" required />
+        </label>
+
+        <label for="email">
+          Correo electrónico
+          <input type="email" id="email" name="email" required />
+        </label>
+        <label for="password">
+          Contraseña
+          <input type="password" id="password" name="password" required />
+        </label>
+
+        <label for="avatar">
+          Avatar
+          <input type="avatar" id="avatar" name="avatar"  />
+        </label>
+
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+  </main>
+</body>
