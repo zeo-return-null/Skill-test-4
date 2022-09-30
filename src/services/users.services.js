@@ -5,8 +5,8 @@ const getAllUsers = () => {
   return users;
 };
 
-const getOneUser = (name) => {
-  const user = User.getOneUser(name);
+const getOneUser = (id) => {
+  const user = User.getOneUser(id);
   return user;
 };
 

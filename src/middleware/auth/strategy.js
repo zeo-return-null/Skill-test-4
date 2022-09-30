@@ -46,24 +46,29 @@ passport.use(
           organization_id,
         } = req.body;
 
-        if (!name || !surname || !email || !phone || !birthdate) {
+        if (!name || !surname) {
           return done(null, false, {
-            message:
-              "Fields required: name, surname, email, phone number, birthdate",
+            message: "Name and surname are required fields",
           });
         }
 
-        if (!phoneRegex.test(phone)) {
+        if (!email || !password) {
           return done(null, false, {
-            message: "Please enter a valid phone number",
+            message: "mail and password are required fields",
           });
         }
 
-        if (!dateRegex.test(birthdate)) {
-          return done(null, false, {
-            message: "Please enter a valid birthdate",
-          });
-        }
+        // if (!phoneRegex.test(phone)) {
+        //   return done(null, false, {
+        //     message: "Please enter a valid phone number",
+        //   });
+        // }
+
+        // if (!dateRegex.test(birthdate)) {
+        //   return done(null, false, {
+        //     message: "Please enter a valid birthdate",
+        //   });
+        // }
 
         if (!emailRegex.test(email)) {
           return done(null, false, {
@@ -122,11 +127,40 @@ passport.use(
 
 passport.use(
   "local-login",
-  new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true,
-  },
-  async
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true,
+    },
+    async (req, email, password, done) => {
+      try {
+        if (!email || !password) {
+          return done(null, false, { message: "Email and password required" });
+        }
+
+        if (!emailRegex.test(email)) {
+          return done(null, false, { message: "Invalid mail" });
+        }
+
+        const user = await User.getOneUser(email);
+
+        if (!user) {
+          return done(null, false, { message: "This user doesnt exist" });
+        }
+
+        const passwordChecker = await bcrypt.compare(password, user.password);
+
+        if (!passwordChecker) {
+          return done(null, false, { message: "Invalid password" });
+        }
+
+        done(null, user);
+      } catch (error) {
+        done(error);
+      }
+    }
   )
-)
+);
+
+export default passport;
