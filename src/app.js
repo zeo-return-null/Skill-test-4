@@ -10,7 +10,7 @@ import { SESSION_SECRET } from './config.js';
 
 // Import Strategies
 import "./middleware/auth/strategy.js";
-// import "./middleware/auth/oauth-strategy.js";
+import "./middleware/auth/oauth-strategy.js";
 
 // Import de Rutas
 import indexRoute from "./v1/routes/index.routes.js";
