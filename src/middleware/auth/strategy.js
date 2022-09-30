@@ -31,6 +31,7 @@ passport.use(
           name,
           surname,
           avatar,
+          email,
           birthdate,
           pronouns,
           nationality,
@@ -95,6 +96,7 @@ passport.use(
           name,
           surname,
           avatar,
+          email,
           birthdate,
           pronouns,
           nationality,
@@ -143,7 +145,7 @@ passport.use(
           return done(null, false, { message: "Invalid mail" });
         }
 
-        const user = await User.getOneUser(email);
+        const user = await User.getOneUserByEmail(email);
 
         if (!user) {
           return done(null, false, { message: "This user doesnt exist" });

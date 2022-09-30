@@ -10,12 +10,12 @@ async function getAllUsers() {
   const users = await prisma.user.findMany({
     include: {
       city: true,
-			comment: true,
-			hobby: true,
-			language: true,
-			country: true,
-			post: true,
-			state: true,
+      comment: true,
+      hobby: true,
+      language: true,
+      country: true,
+      post: true,
+      state: true,
     },
   });
 
@@ -42,27 +42,50 @@ async function getOneUser(id) {
     },
   });
   await client.set(`users/${id}`, JSON.stringify(user), { EX: 360 });
-  
+
+  return user;
+}
+
+async function getOneUserByEmail(email) {
+  const reply = await client.get(`users/${email}`);
+  if (reply) return JSON.parse(reply);
+  const user = await prisma.user.findFirst({
+    where: {
+      email: email,
+    },
+    include: {
+      comment: true,
+      language: true,
+      hobby: true,
+      post: true,
+      country: true,
+      state: true,
+      city: true,
+    },
+  });
+
+  await client.set(`users/${email}`, JSON.stringify(user), { EX: 360 });
+
   return user;
 }
 
 async function createUser(data) {
-    const createdUser = await prisma.user.create({
-      data: data,
-      include: {
-        comment: true,
-        language: true,
-        hobby: true,
-        post: true,
-        city: true,
-        state: true,
-        country: true
-      }
-    });
-    
-    await client.del("users");
+  const createdUser = await prisma.user.create({
+    data: data,
+    include: {
+      comment: true,
+      language: true,
+      hobby: true,
+      post: true,
+      city: true,
+      state: true,
+      country: true,
+    },
+  });
 
-    return createdUser;
+  await client.del("users");
+
+  return createdUser;
 }
 
 async function updateUser(id, data) {
@@ -107,13 +130,14 @@ async function deactiveUser(id) {
 
   await client.del("users");
   await client.del(`users/${id}`);
-  
+
   return deactiveUser;
 }
 
 export default {
   getAllUsers,
   getOneUser,
+  getOneUserByEmail,
   createUser,
   updateUser,
   activeUser,
