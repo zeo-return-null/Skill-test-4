@@ -1,23 +1,22 @@
 <%- include('partials/head', {title: "TP 4 Skill Factory NodeJS - Login"}); %>
 
 <body>
-  <main class="container">
+  <main class="container d-flex flex-column">
     <div class="container">
-      <h1>Login - Tinderjob</h1>
+      <h1 class="text-center">Login - Tinderjob</h1>
     </div>
-    <div class="container">
-      <form method="post" action="/api/auth/login">
-        <label for="email">
+    <div class="container d-flex flex-column align-items-center">
+      <form method="post" action="/api/auth/login" class="d-flex flex-column align-items-end">
+        <label for="email" class="m-2">
           Correo electrónico
           <input type="email" id="email" name="email" required />
         </label>
-
-        <label for="password">
+        <label for="password" class="m-2">
           Contraseña
           <input type="password" id="password" name="password" required />
         </label>
 
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
       </form>
     </div>
   </main>

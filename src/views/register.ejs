@@ -2,37 +2,37 @@
 %>
 
 <body>
-  <main class="container">
+  <main class="container d-flex flex-column">
     <div class="container">
-      <h1>Registro - Tinderjob</h1>
+      <h1 class="text-center">Registro - Tinderjob</h1>
     </div>
-    <div class="container">
-      <form method="post" action="/api/auth/register">
-        <label for="name">
+    <div class="container d-flex flex-column align-items-center">
+      <form method="post" action="/api/auth/register" class="d-flex flex-column align-items-end">
+        <label for="name" class="m-2">
           Nombre
           <input type="name" id="name" name="name" required />
         </label>
 
-        <label for="surname">
+        <label for="surname" class="m-2">
           Apellido
           <input type="surname" id="surname" name="surname" required />
         </label>
 
-        <label for="email">
+        <label for="email" class="m-2">
           Correo electrónico
           <input type="email" id="email" name="email" required />
         </label>
-        <label for="password">
+        <label for="password" class="m-2">
           Contraseña
           <input type="password" id="password" name="password" required />
         </label>
 
-        <label for="avatar">
+        <label for="avatar" class="m-2">
           Avatar
           <input type="avatar" id="avatar" name="avatar"  />
         </label>
 
-        <button type="submit">Registrarse</button>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
       </form>
     </div>
   </main>
